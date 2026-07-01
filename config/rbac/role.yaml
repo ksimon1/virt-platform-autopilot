@@ -199,3 +199,15 @@ rules:
       - patch
       - update
       - watch
+  # Storage Based Remediation
+  - apiGroups:
+      - storage-based-remediation.medik8s.io
+    resources:
+      - storagebasedremediationconfigs
+    verbs:
+      - create
+      - get
+      - list
+      - patch
+      - update
+      - watch

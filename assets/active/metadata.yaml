@@ -85,6 +85,30 @@ assets:
     reconcile_order: 1
     conditions: []
 
+  # Phase 1: SBR detection-mode config (auto-enabled when SBR CRD is present)
+  # sharedStorageClass defaults to ocs-storagecluster-cephfs; override via
+  # platform.kubevirt.io/sbr-storage-class annotation on HCO.
+  - name: sbr-detection-config
+    path: active/sbr/storage-based-remediation-config.yaml.tpl
+    phase: 1
+    install: always
+    component: StorageBasedRemediationConfig
+    reconcile_order: 1
+    conditions: []
+
+  # Phase 1: NHC with FAR remediator for SBR detection mode
+  # Applied only when both NHC and SBR CRDs are present.
+  # FAR template (fenceagentsremediationtemplate-default) must be created manually
+  # by the user as it requires cluster-specific BMC credentials.
+  - name: nhc-far
+    path: active/sbr/nhc-far.yaml
+    gate_crd: storagebasedremediationconfigs.storage-based-remediation.medik8s.io
+    phase: 1
+    install: always
+    component: NodeHealthCheck
+    reconcile_order: 1
+    conditions: []
+
   # Phase 1: Optional Operators (opt-in for clusters with CRDs)
   - name: mtv-operator
     path: active/operators/mtv.yaml.tpl

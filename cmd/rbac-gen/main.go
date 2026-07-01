@@ -176,6 +176,8 @@ func commentForAPIGroup(group string) string {
 		return "KubeDescheduler"
 	case "remediation.medik8s.io":
 		return "NodeHealthCheck"
+	case "storage-based-remediation.medik8s.io":
+		return "Storage Based Remediation"
 	case "self-node-remediation.medik8s.io":
 		return "Self Node Remediation"
 	case "fence-agents-remediation.medik8s.io":
